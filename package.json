@@ -1,0 +1,15 @@
+{
+  "name": "sql_massive_queries",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "execute": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "16.0.3",
+    "mysql2": "2.3.3"
+  }
+}
