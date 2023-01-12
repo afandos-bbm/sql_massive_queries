@@ -47,7 +47,7 @@ async function main() {
 
     try {
         const errorFileName = (process.env.ERROR_FILE_NAME.split('.').slice(0, -1).join('.') + '_errors.json') || 'errors.json';
-        await writeFile(join(__dirname, errorFileName), JSON.stringify(errors));
+        await writeFile(join(__dirname, errorFileName), JSON.stringify(errors), 'utf-8');
         console.log('Errors written to file');
         process.exit(1);
     } catch (error) {
