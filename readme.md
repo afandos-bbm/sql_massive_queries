@@ -18,6 +18,9 @@ First of all, you need to create a `.env` file in the root of the project with t
 
 ```bash
 # File to be used as input for the script (Must be a JSON List)
+# * Use relative path. ("data.json")
+# * JSON File must be in project folder
+# * for use absolute path use: abs:<ABSOLUTE_PATH> (Example: "abs:/home/user/data.json")
 JSON_LIST_FILE_NAME=""
 
 # Database connection parameters
@@ -34,6 +37,8 @@ And then, you can run the script with the following command:
 npm run execute
 ```
 
+If some statement fails, the script will generate a file named `{JSON_LIST_FILE_NAME}_errors.json`.
+
 ## Example JSON List file
 
 [Example file](/example_data.json)
@@ -46,6 +51,18 @@ npm run execute
   "INSERT INTO users ( id, username, password ) VALUES ( '4' , 'test' , 'test' );"
 ]
 ```
+
+## Error Codes
+
+| Code | Description                                    |
+| ---- | ---------------------------------------------- |
+| 0    | No errors                                      |
+| 1    | Some statements failed, written errors to file |
+| 2    | Missing .env file                              |
+| 3    | Missing JSON_LIST_FILE_NAME in .env            |
+| 4    | Error in SQL Connection                        |
+| 5    | Cannot read input file                         |
+| 6    | Cannot write error file                        |
 
 ## License
 
