@@ -1,5 +1,25 @@
 # Script for execute massive queries to SQL database server
 
+## Table of Contents
+
+- [About](#about)
+- [Install](#install)
+- [Run script](#run-script)
+- [Example of .env File](#example-env-file)
+- [Example JSON List file](#example-json-list-file)
+- [Error Codes](#error-codes)
+- [License](#license)
+- [Contributing](#contributing)
+- [Author](#author)
+
+## About
+
+This project is a script for execute massive queries to SQL database server.
+The queries are read from a JSON List file.
+
+This script is useful for execute massive queries to a database server and not worry about the number of queries.
+The script will execute the queries in the JSON List file and if some statement fails, the script will generate a file named `{JSON_LIST_FILE_NAME}_errors.json` with the failed statements.
+
 ## Install
 
 This project uses [Node.js](https://nodejs.org/en/) and [npm](https://www.npmjs.com/) as package manager, so you need to install it first.
