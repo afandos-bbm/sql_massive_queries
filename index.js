@@ -64,8 +64,10 @@ async function main() {
         console.log('Errors written to file');
         process.exit(1);
     } catch (error) {
-        console.error('Error writing errors to file');
+        console.error('Error writing errors to file, printing to console instead! \n\n Error:');
         console.error(error);
+        console.log('\n\nSQL Statements that failed:');
+        console.log(errors);
         process.exit(2);
     }
 }
