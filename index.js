@@ -16,7 +16,7 @@ async function main() {
 
     const connection = await sql.createConnection(DB_CONFIG).catch((error) => {
         console.error(error);
-        process.exit(1);
+        process.exit(3);
     });
 
     const filePath = join(__dirname, JSON_LIST_FILE_NAME);
@@ -27,20 +27,24 @@ async function main() {
 
     const errors = [];
 
+    let i = 0;
     for (const statement of parsedList) {
         try {
             await connection.query(statement);
-            console.log('success statement:\n', statement);
+            console.log('Statement ' + i + ' executed successfully.');
         } catch (error) {
-            console.error('error statement:\n', statement);
+            console.error('Statement ' + i + ' failed.');
+            console.error(error);
             errors.push(error);
         }
+        i++;
     }
 
     if (errors.length === 0) {
-        console.log('no errors');
+        console.log('\n\nNo errors detected\n\n');
         process.exit(0);
     }
+
     console.error(errors);
     const savedStatus = await writeFile(join(__dirname, 'errors.json'), JSON.stringify(errors));
 
