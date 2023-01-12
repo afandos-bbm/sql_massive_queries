@@ -22,13 +22,12 @@ async function main() {
     const filePath = join(__dirname, JSON_LIST_FILE_NAME);
 
     const file = await readFile(filePath, 'utf-8');
-
-    const parsedList = JSON.parse(file);
+    const parsedFileList = JSON.parse(file);
 
     const errors = [];
 
     let i = 0;
-    for (const statement of parsedList) {
+    for (const statement of parsedFileList) {
         try {
             await connection.query(statement);
             console.log('Statement ' + i + ' executed successfully.');
@@ -45,16 +44,17 @@ async function main() {
         process.exit(0);
     }
 
-    console.error(errors);
-    const savedStatus = await writeFile(join(__dirname, 'errors.json'), JSON.stringify(errors));
 
-    if (savedStatus) {
-        console.log('errors saved');
-    } else {
-        console.error('errors not saved');
+    try {
+        const errorFileName = (process.env.ERROR_FILE_NAME.split('.').slice(0, -1).join('.') + '_errors.json') || 'errors.json';
+        await writeFile(join(__dirname, errorFileName), JSON.stringify(errors));
+        console.log('Errors written to file');
+        process.exit(1);
+    } catch (error) {
+        console.error('Error writing errors to file');
+        console.error(error);
+        process.exit(2);
     }
-
-    process.exit(1);
 }
 
 main();
