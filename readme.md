@@ -31,6 +31,21 @@ DB_PASSWORD=""
 DB_NAME=""
 ```
 
+#### Path to JSON List file
+
+The `JSON_LIST_FILE_NAME` parameter is the path to the JSON List file.
+
+You can use relative path or absolute path.
+
+- Relative path: `data.json`
+- Absolute path: `abs:/home/user/data.json`
+
+#### Database connection parameters
+
+The `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD` and `DB_NAME` parameters are the connection parameters to the database server.
+
+
+### **Execute script**
 And then, you can run the script with the following command:
 
 ```bash
