@@ -1,6 +1,6 @@
 const sql = require('mysql2/promise');
 const { readFile, writeFile } = require('node:fs').promises;
-const { join } = require('path');
+const path = require('path');
 require('dotenv').config();
 
 const JSON_LIST_FILE_NAME = process.env.JSON_LIST_FILE_NAME || null;
@@ -28,11 +28,15 @@ async function main() {
         process.exit(4);
     });
 
-    const filePath = join(__dirname, JSON_LIST_FILE_NAME);
 
     const parsedFileList = [];
     try {
+        const filePath = JSON_LIST_FILE_NAME.startsWith('abs:')
+            ? JSON_LIST_FILE_NAME.slice(4)
+            : path.join(__dirname, JSON_LIST_FILE_NAME);
+
         const file = await readFile(filePath, 'utf-8');
+
         parsedFileList.push(...JSON.parse(file));
         console.log('File read successfully');
     } catch (error) {
@@ -64,7 +68,7 @@ async function main() {
 
 
     try {
-        const errorFileName = (process.env.ERROR_FILE_NAME.split('.').slice(0, -1).join('.') + '_errors.json') || 'errors.json';
+        const errorFileName = JSON_LIST_FILE_NAME.sta
         await writeFile(join(__dirname, errorFileName), JSON.stringify(errors), 'utf-8');
         console.log('Errors written to file');
         process.exit(1);
