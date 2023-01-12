@@ -13,14 +13,19 @@ const DB_CONFIG = {
 };
 
 async function main() {
+    if (process.env === undefined) {
+        console.error('No .env file found.');
+        process.exit(2);
+    }
+
     if (JSON_LIST_FILE_NAME === null) {
         console.error('JSON_LIST_FILE_NAME not set in .env file.');
-        process.exit(5);
+        process.exit(3);
     }
 
     const connection = await sql.createConnection(DB_CONFIG).catch((error) => {
         console.error(error);
-        process.exit(3);
+        process.exit(4);
     });
 
     const filePath = join(__dirname, JSON_LIST_FILE_NAME);
@@ -31,9 +36,9 @@ async function main() {
         parsedFileList.push(...JSON.parse(file));
         console.log('File read successfully');
     } catch (error) {
-        console.error('Error reading file');
+        console.error('Error reading input file');
         console.error(error);
-        process.exit(4);
+        process.exit(5);
     }
 
     const errors = [];
@@ -68,7 +73,7 @@ async function main() {
         console.error(error);
         console.log('\n\nSQL Statements that failed:');
         console.log(errors);
-        process.exit(2);
+        process.exit(6);
     }
 }
 
