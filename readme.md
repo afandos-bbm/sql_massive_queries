@@ -1,4 +1,8 @@
-# Script for execute massive queries to SQL database server
+<div align="center">
+<h1>Script for execute massive queries to SQL database server</h1>
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+</div>
 
 ## Table of Contents
 
