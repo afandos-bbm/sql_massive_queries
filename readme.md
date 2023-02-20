@@ -1,5 +1,6 @@
 <div align="center">
 <h1>Script for execute massive queries to SQL database server</h1>
+<h2>This script takes an array of strings from a .json file as input.</h2>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 </div>
